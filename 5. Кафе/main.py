@@ -15,7 +15,7 @@ def main():
 
     active_coupons = 0
     used_coupons = 0
-    total = 0 # Все деньги
+    total = 0  # Все деньги
     # NB: индексы, начинаются с 0
     # todo: отсортировать в конце и +1
     used_days = []
@@ -30,7 +30,7 @@ def main():
 
         # Запишем сумму.
         total += prices[i]
-        
+
         # Можем ли применить купоны?
         if active_coupons > 0:
             expensive_val = 0
@@ -51,7 +51,7 @@ def main():
 
     print(total)
     print(active_coupons, used_coupons)
-    
+
     # отформатировать вывод
     print(*sorted([i+1 for i in used_days]), sep="\n")
 
