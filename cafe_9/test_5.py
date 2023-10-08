@@ -1,5 +1,5 @@
 import io
-from main import main
+from .main import main
 import pytest
 
 
