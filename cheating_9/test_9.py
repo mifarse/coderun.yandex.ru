@@ -1,19 +1,23 @@
 import io
-from .main import main
 import pytest
+from .main import main
 
 
 @pytest.mark.parametrize(
     "test_input,expected",
     [
         (
-            """1
-            1
-            1
-            1
-            1
-            """, "YES\n"),
-        ("2\n2\n2\n1\n1", "NO\n"),
+            """3 2
+            1 2
+            2 3
+            """, "YES\n"
+        ),
+        (
+            """3 3
+            1 2
+            2 3
+            1 3
+            """, "NO\n")
     ],
 )
 def test_1(capsys, monkeypatch, test_input, expected):
