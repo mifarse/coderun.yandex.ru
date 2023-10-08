@@ -27,7 +27,8 @@
 				"ms-python.python",
 				"ms-python.vscode-pylance",
 				"ms-python.black-formatter",
-				"stkb.rewrap"
+				"stkb.rewrap",
+				"ms-python.pylint"
 			]
 		}
 	}
