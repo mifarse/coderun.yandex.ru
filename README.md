@@ -1,10 +1,10 @@
-<p align="center">
-    <a href="https://github.com/psf/black"><img alt="Code style: black" src="https://img.shields.io/badge/code%20style-black-000000.svg"></a>
-</p>
-
 # Решение задач с coderun.yandex.ru
 Всем привет! В этом репозитории я собираю свои решения по задачам на языке
 python.
+
+<p align="left">
+    <a href="https://github.com/psf/black"><img alt="Code style: black" src="https://img.shields.io/badge/code%20style-black-000000.svg"></a>
+</p>
 
 ## Минимальная настройка репозитория
 Чтобы работать с этим репозиторием просто создайте ✨ codespace ✨
