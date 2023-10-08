@@ -20,18 +20,19 @@ def main():
     e = int(input())
 
     # Грань AxB
-    if fits(a,b,d,e):
+    if fits(a, b, d, e):
         print("YES")
         return
     # Грань BxC
-    if fits(b,c,d,e):
+    if fits(b, c, d, e):
         print("YES")
         return
     # Грань AxC
-    if fits(a,c,d,e):
+    if fits(a, c, d, e):
         print("YES")
         return
     print("NO")
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     main()

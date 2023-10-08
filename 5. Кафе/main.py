@@ -35,7 +35,7 @@ def main():
         if active_coupons > 0:
             expensive_val = 0
             expensive_idx = 0
-            for j in range(i+1, len(prices)):
+            for j in range(i + 1, len(prices)):
                 # скип дней, в которые использован купон
                 if j in used_days:
                     continue
@@ -53,8 +53,8 @@ def main():
     print(active_coupons, used_coupons)
 
     # отформатировать вывод
-    print(*sorted([i+1 for i in used_days]), sep="\n")
+    print(*sorted([i + 1 for i in used_days]), sep="\n")
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
