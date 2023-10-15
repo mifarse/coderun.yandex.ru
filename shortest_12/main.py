@@ -22,7 +22,7 @@ def main():
 
     queue.append((start, 0))
 
-    while queue and not found_path:
+    while queue:
         node, depth = queue.popleft()
         # Обрабатываем только те вершины, которые не проверялись.
         if node not in visited:
