@@ -1,60 +1,73 @@
 import sys
-
+from collections import namedtuple
 
 def main():
-    """
-    Код программы.
+    
+    MAX_VALUE = 300 * 100
 
-    TODO: Решение неверное. Падает на закрытом тесте #3.
-    """
+    class Obj:
+        def __init__(self, price, active_coupons):
+            self.price = price
+            self.active_coupons = active_coupons
+
+        def __repr__(self):
+            return f"Obj({self.price!r}, {self.active_coupons!r})"
+
+    # Obj = namedtuple("Obj", ("price", "active_coupons"))
+
     n = int(input())
-    prices = list()
-    for _ in range(n):
-        price = int(input())
-        prices.append(price)
+    prices = []
+    for i in range(n):
+        prices.append(int(input()))
+    
+    dp = []
+    for i in range(n):
+        row = [Obj(MAX_VALUE, []) for _ in range(i+2)]
+        dp.append(row)
 
-    active_coupons = 0
-    used_coupons = 0
-    total = 0  # Все деньги
-    # NB: индексы, начинаются с 0
-    # todo: отсортировать в конце и +1
-    used_days = []
-    for i in range(len(prices)):
-        # скип дней, в которые использован купон
-        if i in used_days:
-            continue
+    if prices[0] > 100:
+        dp[0][1].price = prices[0]
+    else:
+        dp[0][0].price = prices[0]
 
-        # Накопим купон
+    active_coupons = []
+
+    # TODO: где-то не сохраняются купоны.
+
+    for i in range(1, n):
         if prices[i] > 100:
-            active_coupons += 1
+            dp[i][1].price = dp[i-1][0].price + prices[i]
+            dp[i][1].active_coupons = dp[i-1][0].active_coupons
+        else:
+            dp[i][0].price = dp[i-1][0].price + prices[i]
+            dp[i][1].active_coupons = dp[i-1][0].active_coupons
+        for j in range(1, i+1):
+            
+            if dp[i-1][j].price < dp[i][j-1].price:
+                dp[i][j-1].price = dp[i-1][j].price
+                dp[i][j-1].active_coupons.append(i+1)
 
-        # Запишем сумму.
-        total += prices[i]
 
-        # Можем ли применить купоны?
-        if active_coupons > 0:
-            expensive_val = 0
-            expensive_idx = 0
-            for j in range(i + 1, len(prices)):
-                # скип дней, в которые использован купон
-                if j in used_days:
-                    continue
-                if prices[j] > expensive_val:
-                    expensive_val = prices[j]
-                    expensive_idx = j
-            # Применить купон на макс. день
-            # если такой есть.
-            if expensive_idx > 0:
-                active_coupons -= 1
-                used_coupons += 1
-                used_days.append(expensive_idx)
+            if prices[i] > 100:
+                dp[i][j+1].price = dp[i-1][j].price + prices[i]
+            else:
+                dp[i][j].price = dp[i-1][j].price + prices[i]
 
-    print(total)
-    print(active_coupons, used_coupons)
+    result = MAX_VALUE
+    count_of_coupons = 0
+    active_coupons = []
+    for j, x in enumerate(dp[n-1]):
+        if x.price < result:
+            result = x.price
+            count_of_coupons = j
+            active_coupons = x.active_coupons
 
-    # отформатировать вывод
-    print(*sorted([i + 1 for i in used_days]), sep="\n")
 
+    print(dp)
+    print(result)
+    print(count_of_coupons, len(active_coupons))
+    for x in active_coupons:
+        print(x)
 
 if __name__ == "__main__":
     main()
